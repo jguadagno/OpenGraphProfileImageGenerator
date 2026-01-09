@@ -23,7 +23,7 @@ if (testImage1A != null)
 ***NOTE***: This assumes you have one of the fonts in the `OpenGraphProfileImageGenerate.Manager.ThemeFonts` collection.
 
 ![Speaker Profile Image - Joseph Guadagno](./test-speaker1a-profile.png)
-~~~~
+
 ## References
 
 Open Graph Protocol [ogp.me](https://ogp.me/)
