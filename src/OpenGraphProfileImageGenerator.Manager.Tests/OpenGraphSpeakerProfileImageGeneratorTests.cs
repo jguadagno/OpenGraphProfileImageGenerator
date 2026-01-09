@@ -1,7 +1,6 @@
 using System.Net;
 using Microsoft.Extensions.Logging;
 using Moq;
-using OpenGraphProfileImageGenerator.Manager;
 using RichardSzalay.MockHttp;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
@@ -53,41 +52,41 @@ public class OpenGraphSpeakerProfileImageGeneratorTests : IDisposable
     public async Task GenerateSpeakerProfileFromUrlsAsync_Throws_When_SpeakerImageUrl_Null()
     {
         await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync(null!, "http://logo.com/i.png", "Name", ["Arial"]));
+            _generator.GenerateSpeakerProfileFromUrlsAsync(null!, "https://logo.com/i.png", "Name", ["Arial"]));
     }
 
     [Fact]
     public async Task GenerateSpeakerProfileFromUrlsAsync_Throws_When_LogoUrl_Null()
     {
         await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync("http://speaker.com/i.png", null!, "Name", ["Arial"]));
+            _generator.GenerateSpeakerProfileFromUrlsAsync("https://speaker.com/i.png", null!, "Name", ["Arial"]));
     }
 
     [Fact]
     public async Task GenerateSpeakerProfileFromUrlsAsync_Throws_When_SpeakerName_Null()
     {
         await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync("http://speaker.com/i.png", "http://logo.com/i.png", null!, ["Arial"]));
+            _generator.GenerateSpeakerProfileFromUrlsAsync("https://speaker.com/i.png", "https://logo.com/i.png", null!, ["Arial"]));
     }
 
     [Fact]
     public async Task GenerateSpeakerProfileFromUrlsAsync_Throws_When_Invalid_Urls()
     {
         await Assert.ThrowsAsync<ArgumentException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync("invalid-url", "http://logo.com/i.png", "Name", ["Arial"]));
+            _generator.GenerateSpeakerProfileFromUrlsAsync("invalid-url", "https://logo.com/i.png", "Name", ["Arial"]));
         
         await Assert.ThrowsAsync<ArgumentException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync("http://speaker.com/i.png", "invalid-url", "Name", ["Arial"]));
+            _generator.GenerateSpeakerProfileFromUrlsAsync("https://speaker.com/i.png", "invalid-url", "Name", ["Arial"]));
     }
 
     [Fact]
     public async Task GenerateSpeakerProfileFromUrlsAsync_Throws_When_FontFamilyNames_Empty()
     {
         await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync("http://speaker.com/i.png", "http://logo.com/i.png", "Name", (string[])null!));
+            _generator.GenerateSpeakerProfileFromUrlsAsync("https://speaker.com/i.png", "https://logo.com/i.png", "Name", (string[])null!));
         
         await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync("http://speaker.com/i.png", "http://logo.com/i.png", "Name", Array.Empty<string>()));
+            _generator.GenerateSpeakerProfileFromUrlsAsync("https://speaker.com/i.png", "https://logo.com/i.png", "Name", Array.Empty<string>()));
     }
 
     [Fact]
@@ -102,11 +101,11 @@ public class OpenGraphSpeakerProfileImageGeneratorTests : IDisposable
             imageBytes = ms.ToArray();
         }
 
-        _mockHttp.When("http://speaker.com/i.png").Respond("image/png", new MemoryStream(imageBytes));
-        _mockHttp.When("http://logo.com/i.png").Respond("image/png", new MemoryStream(imageBytes));
+        _mockHttp.When("https://speaker.com/i.png").Respond("image/png", new MemoryStream(imageBytes));
+        _mockHttp.When("https://logo.com/i.png").Respond("image/png", new MemoryStream(imageBytes));
 
         // Act
-        var result = await _generator.GenerateSpeakerProfileFromUrlsAsync("http://speaker.com/i.png", "http://logo.com/i.png", "John Doe", ["Arial"]);
+        var result = await _generator.GenerateSpeakerProfileFromUrlsAsync("https://speaker.com/i.png", "https://logo.com/i.png", "John Doe", ["Arial"]);
 
         // Assert
         Assert.NotNull(result);
@@ -118,7 +117,7 @@ public class OpenGraphSpeakerProfileImageGeneratorTests : IDisposable
     public async Task GenerateSpeakerProfileFromUrlsAsync_WithFontFile_Throws_When_FileNotExists()
     {
         await Assert.ThrowsAsync<ArgumentException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync("http://speaker.com/i.png", "http://logo.com/i.png", "Name", "nonexistent.ttf"));
+            _generator.GenerateSpeakerProfileFromUrlsAsync("https://speaker.com/i.png", "https://logo.com/i.png", "Name", "nonexistent.ttf"));
     }
 
     [Fact]
@@ -151,13 +150,13 @@ public class OpenGraphSpeakerProfileImageGeneratorTests : IDisposable
             imageBytes = ms.ToArray();
         }
 
-        _mockHttp.When("http://speaker.com/i.png").Respond("image/png", new MemoryStream(imageBytes));
-        _mockHttp.When("http://logo.com/i.png").Respond("image/png", new MemoryStream(imageBytes));
+        _mockHttp.When("https://speaker.com/i.png").Respond("image/png", new MemoryStream(imageBytes));
+        _mockHttp.When("https://logo.com/i.png").Respond("image/png", new MemoryStream(imageBytes));
 
         var fontFamily = SystemFonts.Families.First();
 
         // Act
-        var result = await _generator.GenerateSpeakerProfileFromUrlsAsync("http://speaker.com/i.png", "http://logo.com/i.png", "John Doe", fontFamily);
+        var result = await _generator.GenerateSpeakerProfileFromUrlsAsync("https://speaker.com/i.png", "https://logo.com/i.png", "John Doe", fontFamily);
 
         // Assert
         Assert.NotNull(result);
@@ -247,9 +246,9 @@ public class OpenGraphSpeakerProfileImageGeneratorTests : IDisposable
     public async Task GenerateSpeakerProfileFromUrlsAsync_WithFontFile_Throws_When_FontFile_NullOrEmpty()
     {
         await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync("http://s.com/i.png", "http://l.com/i.png", "Name", (string)null!));
+            _generator.GenerateSpeakerProfileFromUrlsAsync("https://s.com/i.png", "https://l.com/i.png", "Name", (string)null!));
         await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync("http://s.com/i.png", "http://l.com/i.png", "Name", ""));
+            _generator.GenerateSpeakerProfileFromUrlsAsync("https://s.com/i.png", "https://l.com/i.png", "Name", ""));
     }
 
     [Fact]
@@ -328,10 +327,10 @@ public class OpenGraphSpeakerProfileImageGeneratorTests : IDisposable
     [Fact]
     public async Task GetImageStreamFromUrlAsync_Throws_When_HttpError()
     {
-        _mockHttp.When("http://error.com/i.png").Respond(HttpStatusCode.NotFound);
+        _mockHttp.When("https://error.com/i.png").Respond(HttpStatusCode.NotFound);
 
         // GetImageStreamFromUrlAsync is private, but we can test it via GenerateSpeakerProfileFromUrlsAsync
         await Assert.ThrowsAsync<HttpRequestException>(() =>
-            _generator.GenerateSpeakerProfileFromUrlsAsync("http://error.com/i.png", "http://logo.com/i.png", "Name", ["Arial"]));
+            _generator.GenerateSpeakerProfileFromUrlsAsync("https://error.com/i.png", "https://logo.com/i.png", "Name", ["Arial"]));
     }
 }

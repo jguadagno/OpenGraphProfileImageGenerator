@@ -379,7 +379,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
         {
             throw new ApplicationException("No fonts found in the list of fonts provided.");
         }
-        return GenerateSpeakerProfile(speakerImage, logoImage, speakerName, (FontFamily)fontFamilyToUse.Value, width, height);
+        return GenerateSpeakerProfile(speakerImage, logoImage, speakerName, fontFamilyToUse.Value, width, height);
     }
 
     /// <summary>
@@ -401,7 +401,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
         {
             throw new ApplicationException("No fonts found in the list of fonts provided.");
         }
-        return GenerateSpeakerProfile(speakerImage, logoImage, speakerName, (FontFamily)fontFamilyToUse.Value, width, height);
+        return GenerateSpeakerProfile(speakerImage, logoImage, speakerName, fontFamilyToUse.Value, width, height);
     }
 
     /// <summary>
@@ -417,7 +417,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
         FontFamily fontFamily,
         int width = 1200, int height = 630)
     {
-using var canvas = new Image<Rgba32>(width, height);
+        using var canvas = new Image<Rgba32>(width, height);
 
         // Gradient background (Bootstrap United style)
         var gradientBrush = new LinearGradientBrush(
