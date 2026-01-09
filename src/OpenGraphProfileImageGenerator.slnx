@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/ExtraFiles/">
+    <File Path="../.gitignore" />
+    <File Path="../readme.md" />
+    <File Path="../Ubuntu-R.ttf" />
+  </Folder>
+  <Project Path="OpenGraphProfileImageGenerator.ConsoleApp/OpenGraphProfileImageGenerator.ConsoleApp.csproj" />
+  <Project Path="OpenGraphProfileImageGenerator.Manager.Tests/OpenGraphProfileImageGenerator.Manager.Tests.csproj" />
+  <Project Path="OpenGraphProfileImageGenerator.Manager/OpenGraphProfileImageGenerator.Manager.csproj" />
+</Solution>
