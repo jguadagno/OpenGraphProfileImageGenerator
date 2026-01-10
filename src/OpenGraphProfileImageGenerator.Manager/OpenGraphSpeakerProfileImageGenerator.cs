@@ -79,7 +79,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
     public async Task<Image?> GenerateSpeakerProfileFromUrlsAsync(string speakerImageUrl, string logoUrl,
         string speakerName,
         string[] fontFamilyNames,
-        int width = 1200, int height = 630)
+        int width = DefaultOpenGraphWidth, int height = DefaultOpenGraphHeight)
     {
         if (string.IsNullOrEmpty(speakerImageUrl))
         {
@@ -132,7 +132,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
     public async Task<Image?> GenerateSpeakerProfileFromUrlsAsync(string speakerImageUrl, string logoUrl,
         string speakerName,
         string fontFamilyFile,
-        int width = 1200, int height = 630)
+        int width = DefaultOpenGraphWidth, int height = DefaultOpenGraphHeight)
     {
         if (string.IsNullOrEmpty(speakerImageUrl))
         {
@@ -188,7 +188,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
     public async Task<Image?> GenerateSpeakerProfileFromUrlsAsync(string speakerImageUrl, string logoUrl,
         string speakerName,
         FontFamily fontFamily,
-        int width = 1200, int height = 630)
+        int width = DefaultOpenGraphWidth, int height = DefaultOpenGraphHeight)
     {
         if (string.IsNullOrEmpty(speakerImageUrl))
         {
@@ -235,7 +235,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
     public async Task<Image?> GenerateSpeakerProfileFromFilesAsync(string speakerImageFile, string logoFile,
         string speakerName,
         string[] fontFamilyNames,
-        int width = 1200, int height = 630)
+        int width = DefaultOpenGraphWidth, int height = DefaultOpenGraphHeight)
     {
         if (string.IsNullOrEmpty(speakerImageFile))
         {
@@ -283,7 +283,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
     public async Task<Image?> GenerateSpeakerProfileFromFilesAsync(string speakerImageFile, string logoFile,
         string speakerName,
         string fontFamilyFile,
-        int width = 1200, int height = 630)
+        int width = DefaultOpenGraphWidth, int height = DefaultOpenGraphHeight)
     {
         if (string.IsNullOrEmpty(speakerImageFile))
         {
@@ -331,7 +331,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
     public async Task<Image?> GenerateSpeakerProfileFromFilesAsync(string speakerImageFile, string logoFile,
         string speakerName,
         FontFamily fontFamily,
-        int width = 1200, int height = 630)
+        int width = DefaultOpenGraphWidth, int height = DefaultOpenGraphHeight)
     {
         if (string.IsNullOrEmpty(speakerImageFile))
         {
@@ -372,7 +372,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
     /// <returns>The generated image</returns>
     public Image GenerateSpeakerProfile(Image speakerImage, Image logoImage, string speakerName,
         string[] fontFamilyNames,
-        int width = 1200, int height = 630)
+        int width = DefaultOpenGraphWidth, int height = DefaultOpenGraphHeight)
     {
         var fontFamilyToUse = GetFontFamilyFromList(fontFamilyNames);
         if (fontFamilyToUse == null)
@@ -394,7 +394,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
     /// <returns>The generated image</returns>
     public Image GenerateSpeakerProfile(Image speakerImage, Image logoImage, string speakerName,
         string fontFamilyFile,
-        int width = 1200, int height = 630)
+        int width = DefaultOpenGraphWidth, int height = DefaultOpenGraphHeight)
     {
         var fontFamilyToUse = GetFontFamilyFromFile(fontFamilyFile);
         if (fontFamilyToUse == null)
@@ -415,7 +415,7 @@ public class OpenGraphSpeakerProfileImageGenerator(
     /// <param name="height">The height of the generated image.</param>
     public Image GenerateSpeakerProfile(Image speakerImage, Image logoImage, string speakerName,
         FontFamily fontFamily,
-        int width = 1200, int height = 630)
+        int width = DefaultOpenGraphWidth, int height = DefaultOpenGraphHeight)
     {
         using var canvas = new Image<Rgba32>(width, height);
 
